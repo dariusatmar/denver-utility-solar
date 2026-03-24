@@ -193,6 +193,63 @@
         .bar-fill.amber { background: #d97706; }
         .bar-fill.green { background: #16a34a; }
         .bar-fill.red { background: #dc2626; }
+
+        /* RANGE BAR (shared axis) */
+        .range-chart { display: flex; flex-direction: column; gap: 10px; }
+        .range-row { display: flex; align-items: center; gap: 12px; }
+        .range-label {
+            width: 130px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            text-align: right;
+            flex-shrink: 0;
+            color: #555;
+        }
+        .range-label.highlight { color: #111; font-weight: 700; }
+        .range-track {
+            flex: 1;
+            height: 28px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            position: relative;
+        }
+        .range-fill {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #fff;
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+            min-width: 20px;
+        }
+        .range-fill.accent { background: #2563eb; }
+        .range-fill.highlight { background: #111; }
+        .range-fill.muted { background: #94a3b8; }
+        .range-fill.green { background: #16a34a; }
+        .range-fill.red { background: #dc2626; }
+        .range-fill .range-text-after {
+            position: absolute;
+            left: calc(100% + 6px);
+            color: #555;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+        .range-axis {
+            display: flex;
+            justify-content: space-between;
+            padding-left: 142px;
+            margin-top: 8px;
+            font-size: 0.68rem;
+            color: #bbb;
+            font-variant-numeric: tabular-nums;
+        }
+
         .chart-note {
             margin-top: 16px;
             font-size: 0.78rem;
@@ -416,35 +473,43 @@
 
         <div class="chart-box">
             <div class="chart-title">Levelized Cost of Energy — $/MWh (unsubsidized, 2025)</div>
-            <div class="bar-chart">
-                <div class="bar-row">
-                    <div class="bar-label">Gas peaker</div>
-                    <div class="bar-track"><div class="bar-fill red" style="width: 100%">$115–221</div></div>
+            <div class="range-chart">
+                <!-- axis max = $240. left% = min/240*100, width% = (max-min)/240*100 -->
+                <div class="range-row">
+                    <div class="range-label">Gas peaker</div>
+                    <div class="range-track"><div class="range-fill red" style="left: 47.9%; width: 44.2%;">$115–221</div></div>
                 </div>
-                <div class="bar-row">
-                    <div class="bar-label">Nuclear (new)</div>
-                    <div class="bar-track"><div class="bar-fill muted" style="width: 85%">$136–189</div></div>
+                <div class="range-row">
+                    <div class="range-label">Nuclear (new)</div>
+                    <div class="range-track"><div class="range-fill muted" style="left: 56.7%; width: 22.1%;">$136–189</div></div>
                 </div>
-                <div class="bar-row">
-                    <div class="bar-label">Coal</div>
-                    <div class="bar-track"><div class="bar-fill muted" style="width: 69%">$65–152</div></div>
+                <div class="range-row">
+                    <div class="range-label">Coal</div>
+                    <div class="range-track"><div class="range-fill muted" style="left: 27.1%; width: 36.3%;">$65–152</div></div>
                 </div>
-                <div class="bar-row">
-                    <div class="bar-label">Gas combined</div>
-                    <div class="bar-track"><div class="bar-fill muted" style="width: 46%">$39–101</div></div>
+                <div class="range-row">
+                    <div class="range-label">Gas combined</div>
+                    <div class="range-track"><div class="range-fill muted" style="left: 16.3%; width: 25.8%;">$39–101</div></div>
                 </div>
-                <div class="bar-row">
-                    <div class="bar-label">Onshore wind</div>
-                    <div class="bar-track"><div class="bar-fill accent" style="width: 34%">$24–75</div></div>
+                <div class="range-row">
+                    <div class="range-label">Onshore wind</div>
+                    <div class="range-track"><div class="range-fill accent" style="left: 10.0%; width: 21.3%;">$24–75</div></div>
                 </div>
-                <div class="bar-row">
-                    <div class="bar-label highlight">Utility solar</div>
-                    <div class="bar-track"><div class="bar-fill green" style="width: 43%">$24–96</div></div>
+                <div class="range-row">
+                    <div class="range-label highlight">Utility solar</div>
+                    <div class="range-track"><div class="range-fill green" style="left: 10.0%; width: 30.0%;">$24–96</div></div>
                 </div>
-                <div class="bar-row">
-                    <div class="bar-label highlight">Solar + storage</div>
-                    <div class="bar-track"><div class="bar-fill green" style="width: 52%">$46–102</div></div>
+                <div class="range-row">
+                    <div class="range-label highlight">Solar + storage</div>
+                    <div class="range-track"><div class="range-fill green" style="left: 19.2%; width: 23.3%;">$46–102</div></div>
                 </div>
+            </div>
+            <div class="range-axis">
+                <span>$0</span>
+                <span>$60</span>
+                <span>$120</span>
+                <span>$180</span>
+                <span>$240</span>
             </div>
             <p class="chart-note">Unsubsidized LCOE ranges from Lazard LCOE+ 2025. Solar + storage assumes 4-hour lithium-ion battery. At Denver's resource level, expect the lower half of the solar range. Source: Lazard.</p>
         </div>
